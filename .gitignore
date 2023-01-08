@@ -1,0 +1,6 @@
+/node_modules/
+/build/
+/.idea/
+/.env
+/coverage/
+/config/Config.d.ts

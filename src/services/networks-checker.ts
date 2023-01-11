@@ -20,26 +20,31 @@ export class NetworksChecker {
     }
 
     async start(): Promise<void> {
-        this.logger.debug("Starting networks check");
-        const networks = this.config.networks;
-        for (let network of networks) {
-            this.logger.info(`Getting network type for ${network.type}`);
-            const networkType = this.networkUtils.getNetworkType(network.type);
-            this.logger.info(`Checking nodes for ${network.type}`);
-            const result = await this.nodeChecker.checkNodes(networkType, network);
-            this.logger.info(`Nodes check complete for ${network.type}`);
-            this.logger.info(`Saving results for ${network.type}`);
-            for (const value of result) {
-                await this.storage.save(value);
+        try {
+            this.logger.debug("Starting networks check");
+            const networks = this.config.networks;
+            for (let network of networks) {
+                this.logger.info(`Getting network type for ${network.type}`);
+                const networkType = this.networkUtils.getNetworkType(network.type);
+                this.logger.info(`Checking nodes for ${network.type}`);
+                const result = await this.nodeChecker.checkNodes(networkType, network);
+                this.logger.info(`Nodes check complete for ${network.type}`);
+                this.logger.info(`Saving results for ${network.type}`);
+                for (const value of result) {
+                    await this.storage.save(value);
+                }
+                this.logger.info(`Network check complete for ${network.type} network`);
             }
-            this.logger.info(`Network check complete for  ${network.type}`);
-        }
 
-        const interval = this.calculateInterval();
-        this.logger.debug(`Setting up new task for node check in ${interval}ms`);
-        setTimeout(async () => {
-            return await this.start();
-        }, interval);
+            const interval = this.calculateInterval();
+            this.logger.debug(`Setting up new task for node check in ${interval}ms`);
+            setTimeout(async () => {
+                return await this.start();
+            }, interval);
+        }
+        catch (error) {
+            this.logger.error(`Error happened during checking networks: ${error}`)
+        }
     }
 
     private calculateInterval(): number {

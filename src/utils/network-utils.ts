@@ -4,7 +4,7 @@ import { Service } from "typedi";
 @Service()
 export class NetworkUtils {
     getNetworkType(type: string) : NetworkType {
-        switch (type) {
+        switch (type.toLowerCase()) {
             case "ethereum":
                 return NetworkType.Ethereum;
             case "near":

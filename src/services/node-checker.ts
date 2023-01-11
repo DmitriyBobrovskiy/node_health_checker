@@ -42,7 +42,7 @@ export class NodeChecker {
                             networkType: networkType
                         });
         }
-        this.logger.info(`Checking nodes complete for ${networkType}`);
+        this.logger.info(`Checking nodes complete for ${NetworkType[networkType]}`);
         return result;
     }
 

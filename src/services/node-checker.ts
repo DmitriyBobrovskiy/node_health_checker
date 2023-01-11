@@ -15,26 +15,26 @@ export class NodeChecker {
     }
 
     async checkNodes(networkType: NetworkType, network: Network): Promise<NodeCheckResult[]> {
-        this.logger.info(`Starting checking nodes for ${networkType}`);
-        this.logger.debug(`Getting trusted node for ${networkType}`);
+        this.logger.info(`Starting checking nodes for ${NetworkType[networkType]}`);
+        this.logger.debug(`Getting trusted node for ${NetworkType[networkType]}`);
 
         const trustedProvider = this.dataProviderFactory.produce(networkType, network.trustedNode,
                                                                  this.config.timeout,
                                                                  network.networkId);
-        this.logger.debug(`Getting last block of trusted node for ${networkType}`);
+        this.logger.debug(`Getting last block of trusted node for ${NetworkType[networkType]}`);
         const trustedLastBlock = await trustedProvider.getLastBlockNumber();
         // TODO: probably we should check here if trusted node is syncing
 
         const result: NodeCheckResult[] = [];
         for (let node of network.nodes) {
-            this.logger.debug(`Checking node ${node} of ${networkType}`);
+            this.logger.debug(`Checking node ${node} of ${NetworkType[networkType]}`);
             const provider = this.dataProviderFactory.produce(networkType, node,
                                                               this.config.timeout,
                                                               network.networkId);
             const lastBlock = await provider.getLastBlockNumber();
             const difference = trustedLastBlock - lastBlock;
             const isSyncing = await provider.isSyncing();
-            this.logger.debug(`Check of ${node} node is finished for ${networkType}`);
+            this.logger.debug(`Check of ${node} node is finished for ${NetworkType[networkType]}`);
             result.push({
                             node: node,
                             result: this.getResult(difference, this.config.maxBlockDifference,

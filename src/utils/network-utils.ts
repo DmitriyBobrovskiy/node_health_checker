@@ -1,5 +1,7 @@
 import { NetworkType } from "../config/network-type";
+import { Service } from "typedi";
 
+@Service()
 export class NetworkUtils {
     getNetworkType(type: string) : NetworkType {
         switch (type) {

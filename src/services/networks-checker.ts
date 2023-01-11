@@ -3,16 +3,18 @@ import { NetworkUtils } from "../utils/network-utils";
 import { DataProviderFactory } from "./data-provider-factory";
 import { Storage } from "./storage";
 import { NodeChecker } from "./node-checker";
-import { Service } from "typedi";
+import { Inject, Service } from "typedi";
 import { Logger } from "../utils/logger";
 
 @Service()
 export class NetworksChecker {
 
-    constructor(private config: IConfig,
+    constructor(@Inject("config")
+                private config: IConfig,
                 private networkUtils: NetworkUtils,
                 private nodeCheckerFactory: DataProviderFactory,
                 private logger: Logger,
+                @Inject("storage")
                 private storage: Storage,
                 private nodeChecker: NodeChecker) {
     }

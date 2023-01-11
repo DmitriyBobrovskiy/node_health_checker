@@ -2,13 +2,14 @@ import { NodeCheckResult } from "../models/node-check-result";
 import { NetworkType } from "../config/network-type";
 import { IConfig, Network } from "node-config-ts";
 import { DataProviderFactory } from "./data-provider-factory";
-import { Service } from "typedi";
+import { Inject, Service } from "typedi";
 import { Logger } from "../utils/logger";
 
 @Service()
 export class NodeChecker {
     // entire config is not needed here, can be simplified
-    constructor(private config: IConfig,
+    constructor(@Inject("config")
+                private config: IConfig,
                 private dataProviderFactory: DataProviderFactory,
                 private logger: Logger) {
     }

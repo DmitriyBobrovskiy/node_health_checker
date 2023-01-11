@@ -2,13 +2,15 @@ import { NodeCheckResult } from "../models/node-check-result";
 import { NetworkType } from "../config/network-type";
 import { IConfig, Network } from "node-config-ts";
 import { DataProviderFactory } from "./data-provider-factory";
-import winston from "winston";
+import { Service } from "typedi";
+import { Logger } from "../utils/logger";
 
+@Service()
 export class NodeChecker {
     // entire config is not needed here, can be simplified
     constructor(private config: IConfig,
                 private dataProviderFactory: DataProviderFactory,
-                private logger: winston.Logger) {
+                private logger: Logger) {
     }
 
     async checkNodes(networkType: NetworkType, network: Network): Promise<NodeCheckResult[]> {

@@ -1,6 +1,8 @@
 import { Storage } from "./storage";
 import { NodeCheckResult } from "../models/node-check-result";
+import { Service } from "typedi";
 
+@Service()
 export class InMemoryStorage implements Storage {
     private data: NodeCheckResult[] = [];
 

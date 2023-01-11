@@ -2,7 +2,9 @@ import { SlaLevel } from "../config/slaLevel";
 import { Storage } from "./storage";
 import { NetworkType } from "../config/network-type";
 import { Report, ReportRow } from "../models/report";
+import { Service } from "typedi";
 
+@Service()
 export class ReportGenerator {
     private storage: Storage;
 

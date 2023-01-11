@@ -1,5 +1,7 @@
-import createDevLogger from "./dev-logger";
+export interface Logger {
+    info(message: string): void;
+    debug(message: string): void;
+    warn(message: string): void;
+    error(message: string): void;
+}
 
-const logger = createDevLogger();
-
-export default logger;

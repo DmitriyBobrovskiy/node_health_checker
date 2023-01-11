@@ -1,10 +1,11 @@
-import { Connection } from '@solana/web3.js';
-import * as nearAPI from "near-api-js";
-import { ConnectConfig } from "near-api-js";
+import 'reflect-metadata';
+import { Container } from "typedi";
+import { NetworksChecker } from "./services/networks-checker";
 
 class Main {
     public static async start(): Promise<void> {
-
+        const networksChecker = Container.get(NetworksChecker);
+        await networksChecker.start()
 
 
     }

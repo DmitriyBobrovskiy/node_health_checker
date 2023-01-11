@@ -1,16 +1,18 @@
 import { IConfig } from "node-config-ts";
 import { NetworkUtils } from "../utils/network-utils";
 import { DataProviderFactory } from "./data-provider-factory";
-import winston from "winston";
 import { Storage } from "./storage";
 import { NodeChecker } from "./node-checker";
+import { Service } from "typedi";
+import { Logger } from "../utils/logger";
 
+@Service()
 export class NetworksChecker {
 
     constructor(private config: IConfig,
                 private networkUtils: NetworkUtils,
                 private nodeCheckerFactory: DataProviderFactory,
-                private logger: winston.Logger,
+                private logger: Logger,
                 private storage: Storage,
                 private nodeChecker: NodeChecker) {
     }
@@ -38,7 +40,7 @@ export class NetworksChecker {
         }, interval);
     }
 
-    calculateInterval(): number {
+    private calculateInterval(): number {
         // if we want here anything more complex that this line,
         // then this should be put to separate service
         return this.config.interval.period * Math.random();

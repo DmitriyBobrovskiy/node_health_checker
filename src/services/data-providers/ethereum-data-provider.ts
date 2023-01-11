@@ -1,7 +1,9 @@
 import { DataProvider } from "../data-provider";
 import { Eth } from "web3-eth";
 import Web3 from "web3";
+import { Service } from "typedi";
 
+@Service()
 export class EthereumDataProvider implements DataProvider {
     private provider: Eth;
 

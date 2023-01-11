@@ -3,7 +3,9 @@ import * as nearAPI from "near-api-js";
 import { ConnectConfig, Near } from "near-api-js";
 import { NodeStatusResult } from "near-api-js/lib/providers/provider";
 import { promiseWithTimeout } from "../../utils/promise-timeout";
+import { Service } from "typedi";
 
+@Service()
 export class NearDataProvider implements DataProvider {
     private connection: Near | undefined;
 

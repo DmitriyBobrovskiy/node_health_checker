@@ -18,5 +18,8 @@
   "exclude": [
     "build",
     "node_modules"
+  ],
+  "files": [
+    "config/Config.d.ts"
   ]
 }

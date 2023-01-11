@@ -8,8 +8,6 @@ export class InMemoryStorage implements Storage {
 
     public getData(): Promise<NodeCheckResult[]> {
         const data = this.data;
-        // cleaning to simplify aggregation
-        this.data = [];
         return Promise.resolve(data);
     }
 

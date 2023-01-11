@@ -20,5 +20,6 @@
     "period": 450000
   },
   "timeout": 60000,
-  "maxBlockDifference": 10
+  "maxBlockDifference": 10,
+  "reportGeneratingInterval": 86400000
 }

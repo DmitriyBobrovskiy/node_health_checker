@@ -2,14 +2,13 @@ import { SlaLevel } from "../config/slaLevel";
 import { Storage } from "./storage";
 import { NetworkType } from "../config/network-type";
 import { Report, ReportRow } from "../models/report";
-import { Service } from "typedi";
+import { Inject, Service } from "typedi";
 
 @Service()
 export class ReportGenerator {
-    private storage: Storage;
 
-    constructor(storage: Storage) {
-        this.storage = storage;
+    constructor(@Inject("storage")
+                private storage: Storage) {
     }
 
     async generate(): Promise<Report> {
@@ -23,6 +22,8 @@ export class ReportGenerator {
                     value = 0;
                 }
                 map.set([record.networkType, record.node], value + (record.result ? 0 : 1))
+            } else {
+                map.set([record.networkType, record.node], (record.result ? 0 : 1))
             }
         }
         const reportRows: ReportRow[] = [];
@@ -39,7 +40,7 @@ export class ReportGenerator {
         }
     }
 
-    getSlaLevel(numberOfFails: number): SlaLevel {
+    private getSlaLevel(numberOfFails: number): SlaLevel {
         // can be put to config as well
         // very simplified SLA level calculation
         // let's imagine we check node every 7 minutes and 30 seconds

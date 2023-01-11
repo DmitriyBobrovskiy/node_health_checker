@@ -5,24 +5,20 @@
       "nodes": [
         "https://mainnet.infura.io/v3/41dc58193ba14b0e9e677c17b34e98a9"
       ],
-      "trustedNodes": [
-        "https://eth.llamarpc.com"
-      ]
+      "trustedNode": "https://eth.llamarpc.com"
     },
     {
       "type": "Near",
       "nodes": [
         "https://rpc.mainnet.near.org"
       ],
-      "trustedNodes": [
-        ""
-      ],
+      "trustedNode": "https://rpc.mainnet.near.org",
       "networkId": "mainnet"
     }
   ],
   "interval": {
-    "period": 450000,
-    "entropyMaxMultiplier": 1
+    "period": 450000
   },
-  "timeout": 60000
+  "timeout": 60000,
+  "maxBlockDifference": 10
 }

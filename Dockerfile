@@ -13,7 +13,6 @@ RUN npm ci --quiet \
   && npm run build
 
 FROM build AS runtime
-EXPOSE 8080
 EXPOSE 80
 WORKDIR /app
 

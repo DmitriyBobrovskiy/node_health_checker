@@ -33,8 +33,10 @@ export class WebServer {
 
             response.end(this.getHtml(rows));
         });
-        server.listen(8000, "localhost", () => {
-            this.logger.info(`Server is running on http://localhost:${8000}`);
+        const host = "localhost";
+        const port = 80;
+        server.listen(port, host, () => {
+            this.logger.info(`Server is running on http://${host}:${port}`);
         });
     }
 

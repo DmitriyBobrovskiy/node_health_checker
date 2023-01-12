@@ -7,7 +7,6 @@
     "strict": true,
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
 
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
@@ -21,5 +20,9 @@
   ],
   "files": [
     "config/Config.d.ts"
+  ],
+  "include": [
+    "src"
   ]
 }
+
